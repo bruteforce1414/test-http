@@ -11,5 +11,5 @@ func main() {
 }
 
 func HelloServer(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "on branch master")
+	fmt.Fprintf(w, "on branch dev")
 }
