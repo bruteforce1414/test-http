@@ -8,8 +8,6 @@ services:
   - docker
 before_install:
   - docker build -f Dockerfile -t test1 .
-  - docker run  -p 127.0.0.1:8080:8080 test1
-  - docker stop test1
 stages:
 - test
 jobs:
