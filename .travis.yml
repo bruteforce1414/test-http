@@ -1,4 +1,4 @@
-if: type = push
+if: (type = push)OR(type = merge)
 language: go
 go:
 - 1.13.x
