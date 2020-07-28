@@ -8,8 +8,9 @@ services:
   - docker
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -f Dockerfile -t testorg14/test-http .
-  - docker push testorg14/test-http 
+  - docker build -f Dockerfile -t test-http:1.0.0 .
+  - docker images
+  - docker push test-http:1.0.0 
 stages:
 - test
 jobs:
