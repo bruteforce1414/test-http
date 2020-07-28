@@ -10,6 +10,7 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -f Dockerfile -t test-http:1.0.0 .
   - docker images
+  - docker tag test-http noritestmember/test-http:1.0.0
   - docker push test-http:1.0.0 
 stages:
 - test
