@@ -7,8 +7,13 @@ cache:
 services:
   - docker
 before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -f Dockerfile -t testorg14/test-http .
   - docker push testorg14/test-http 
+  - docker images
+  - docker tag demo $DOCKER_USERNAME/test-http 
+  - docker push $DOCKER_USERNAME/test-http 
+  
 stages:
 - test
 jobs:
