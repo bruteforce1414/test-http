@@ -11,6 +11,7 @@ before_install:
   - docker build -f Dockerfile -t test-http:1.0.0 .
   - docker images
   - docker tag test-http noritestmember/test-http:1.0.0
+  - docker commit test-http noritestmember/test-http:1.0.0
   - docker push noritestmember/test-http:1.0.0 
 stages:
 - test
