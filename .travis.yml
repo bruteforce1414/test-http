@@ -10,8 +10,8 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -f Dockerfile -t noritestmember/test-http:1.0.0 .
   - docker images
-  - docker tag test-http noritestmember/test-http:1.0.0
-  - docker commit test-http noritestmember/test-http:1.0.0
+  - docker tag noritestmember/test-http noritestmember/test-http:1.0.0
+  - docker commit noritestmember/test-http noritestmember/test-http:1.0.0
   - docker push noritestmember/test-http:1.0.0 
 stages:
 - test
