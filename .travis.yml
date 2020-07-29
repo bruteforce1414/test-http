@@ -4,20 +4,19 @@ go:
 cache:
   directories:
   - "$GOPATH/pkg/mod"
-
 stages:
 - test
+  if: type = pull_request 
 - deploy
+  if: (type = push AND (branch = master))
 jobs:
   include:
-  if: type = pull_request 
   - stage: test
     script:
     - go test ./... -coverprofile=coverage.out -covermode=atomic
       -p=1
     after_success:
     - bash <(curl -s https://codecov.io/bash)
-  if: (type = push AND (branch = master))
   - stage: deploy  
     services:
       - docker
