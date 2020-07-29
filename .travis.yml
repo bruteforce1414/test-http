@@ -1,28 +1,23 @@
 language: go
 go:
-- 1.14.x
+- 1.13.x
 cache:
   directories:
   - "$GOPATH/pkg/mod"
+services:
+  - docker
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -f Dockerfile -t testorg14/test-http:1.0.0 .
+  - docker images
+  - docker push testorg14/test-http:1.0.0 
 stages:
 - test
-- deploy
-  if: (type = push AND (branch = master))
 jobs:
   include:
   - stage: test
     script:
-     - go test ./... -coverprofile=coverage.out -covermode=atomic
-     -p=1
+    - go test ./... -coverprofile=coverage.out -covermode=atomic
+      -p=1
     after_success:
     - bash <(curl -s https://codecov.io/bash)
-  - stage: deploy  
-    services:
-      - docker
-    before_install:
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -f Dockerfile -t testorg14/test-http:1.0.0 .
-      - docker images
-      - docker push testorg14/test-http:1.0.0 
-    after_success:
-    - bash <(curl -s https://codecov.io/bash)   
