@@ -1,4 +1,3 @@
-if: type = push
 language: go
 go:
 - 1.13.x
@@ -11,12 +10,14 @@ stages:
 - deploy
 jobs:
   include:
+  if: type = pull_request 
   - stage: test
     script:
     - go test ./... -coverprofile=coverage.out -covermode=atomic
       -p=1
     after_success:
     - bash <(curl -s https://codecov.io/bash)
+  if: (type = push AND (branch = master))
   - stage: deploy  
     services:
       - docker
