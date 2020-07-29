@@ -13,6 +13,7 @@ before_install:
   - docker push testorg14/test-http:1.0.0 
 stages:
 - test
+- deploy
 jobs:
   include:
   - stage: test
