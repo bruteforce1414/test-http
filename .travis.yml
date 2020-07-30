@@ -21,6 +21,8 @@ jobs:
       - docker
     before_install:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -f Dockerfile -t testorg14/test-http:$GIT_TAG_VERSION .
+      git tag -ln --format '%(subject)' $TRAVIS_TAG
+
+      - docker build -f Dockerfile -t testorg14/test-http:$TRAVIS_TAG .
       - docker images
-      - docker push testorg14/test-http:$GIT_TAG_VERSION
+      - docker push testorg14/test-http:TRAVIS_TAG
