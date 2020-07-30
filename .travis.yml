@@ -25,5 +25,3 @@ jobs:
       - docker build -f Dockerfile -t testorg14/test-http:1.0.0 .
       - docker images
       - docker push testorg14/test-http:1.0.0 
-    after_success:
-    - bash <(curl -s https://codecov.io/bash)
