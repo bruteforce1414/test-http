@@ -20,8 +20,8 @@ jobs:
     services:
       - docker
     before_install:
-      LAST=$(git rev-parse FETCH_HEAD)
+      - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_TAG ; fi`
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -f Dockerfile -t testorg14/test-http:1.0.0 .
+      - docker build -f Dockerfile -t testorg14/test-http:$TAG .
       - docker images
-      - docker push testorg14/test-http:1.0.0
+      - docker push testorg14/test-http:$TAG
