@@ -5,8 +5,7 @@ cache:
   directories:
   - "$GOPATH/pkg/mod"
 stages:
-- name: test
-  if: type = pull_request
+- test
 - name: deploy
   if: (type = push AND (branch = master))
 jobs:
