@@ -20,8 +20,7 @@ jobs:
     services:
       - docker
     before_install:
-      - publish $TRAVIS_TAG acquia $TRAVIS_BRANCH --process-tag; fi;  
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -f Dockerfile -t testorg14/test-http:tag .
+      - docker build -f Dockerfile -t testorg14/test-http:$GIT_TAG_VERSION .
       - docker images
-      - docker push testorg14/test-http:tag
+      - docker push testorg14/test-http:$GIT_TAG_VERSION
