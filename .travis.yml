@@ -22,6 +22,6 @@ jobs:
     before_install:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - export TRAVIS_TAG="echo $(git describe --abbrev=0);"
-      - docker build -f Dockerfile -t testorg14/test-http:"${TRAVIS_TAG}" .
+      - docker build -f Dockerfile -t testorg14/test-http:"$TRAVIS_TAG" .
       - docker images
-      - docker push testorg14/test-http:"${TRAVIS_TAG}"
+      - docker push testorg14/test-http:"$TRAVIS_TAG"
