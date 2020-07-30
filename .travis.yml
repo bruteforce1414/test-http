@@ -17,13 +17,12 @@ jobs:
     after_success:
     - bash <(curl -s https://codecov.io/bash)
   - stage: deploy
-    env:
-    - TRAVIS_TAG=echo $(git describe --abbrev=0);
+   env:
+    - TRAVIS_TAG=`echo $(git describe --abbrev=0);`
     services:
       - docker
     before_install:
-      - export TAG=if [ "$TRAVIS_TAG" == "" ]; then echo $(git describe --abbrev=0); else echo $TRAVIS_TAG ; fi
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -f Dockerfile -t testorg14/test-http:$TAG .
+      - docker build -f Dockerfile -t testorg14/test-http:$TRAVIS_TAG .
       - docker images
-      - docker push testorg14/test-http:$TAG
+      - docker push testorg14/test-http:$TRAVIS_TAG
