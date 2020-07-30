@@ -21,6 +21,6 @@ jobs:
       - docker
     before_install:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -f Dockerfile -t testorg14/test-http:1.0.0 .
+      - docker build -f Dockerfile -t testorg14/test-http:$GIT_TAG .
       - docker images
-      - docker push testorg14/test-http:1.0.0 
+      - docker push testorg14/test-http:$GIT_TAG 
