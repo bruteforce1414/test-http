@@ -16,7 +16,9 @@ jobs:
       -p=1
     after_success:
     - bash <(curl -s https://codecov.io/bash)
-  - stage: deploy  
+  - stage: deploy
+    env:
+    - TRAVIS_TAG="100.100.100"
     services:
       - docker
     before_install:
