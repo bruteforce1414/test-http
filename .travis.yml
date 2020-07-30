@@ -20,7 +20,7 @@ jobs:
     services:
       - docker
     before_install:
-      - export TAG=if [ "$TRAVIS_BRANCH" == "master" ]; then echo $(git describe --abbrev=0); else echo $TRAVIS_TAG ; fi
+      - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo $(git describe --abbrev=0); else echo $TRAVIS_TAG ; fi`
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build -f Dockerfile -t testorg14/test-http:$TAG .
       - docker images
