@@ -7,6 +7,8 @@ cache:
 stages:
 - test
 - name: deploy
+  only:
+  - master
   if: tag IS present
 jobs:
   include:
