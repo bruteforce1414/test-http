@@ -17,12 +17,10 @@ jobs:
     after_success:
     - bash <(curl -s https://codecov.io/bash)
   - stage: deploy
-    env:
-    - TRAVIS_TAG=``
     services:
       - docker
     before_install:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -f Dockerfile -t testorg14/test-http:$TRAVIS_TAG .
+      - docker build -f Dockerfile -t testorg14/test-http:"$TRAVIS_TAG" .
       - docker images
-      - docker push testorg14/test-http:$TRAVIS_TAG
+      - docker push testorg14/test-http:"$TRAVIS_TAG"
