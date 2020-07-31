@@ -19,7 +19,7 @@ jobs:
   - stage: deploy
     services:
       - docker
-    before_install:
+    script:
       - export TAG=`if [ "$TRAVIS_TAG" == "" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_TAG ; fi`
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build -f Dockerfile -t testorg14/test-http:$TAG .
