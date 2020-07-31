@@ -20,7 +20,8 @@ jobs:
     services:
       - docker
     before_install:
+      - export TAG=`if [ "$TRAVIS_TAG" == "" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_TAG ; fi`
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -f Dockerfile -t testorg14/test-http:"$TRAVIS_TAG" .
+      - docker build -f Dockerfile -t testorg14/test-http:$TAG .
       - docker images
-      - docker push testorg14/test-http:"$TRAVIS_TAG"
+      - docker push testorg14/test-http:$TAG
